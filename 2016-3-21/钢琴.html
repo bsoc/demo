@@ -1,0 +1,44 @@
+<!--code By Z-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="copy-right" content="">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <title>士大夫撒地方第三方士大夫</title>
+    <style>
+        *{margin:0;padding:0;}
+        .box{width:800px;margin:50px auto;}
+        .box div{float:left;width:12.5%;height:200px;background:#ccc;text-align:center; line-height:100px; box-shadow:inset 0 0 1px #000;}
+        div.on{background:#999999;}
+    </style>
+    <script src="sound.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded',function(){
+            var aDiv=document.querySelectorAll('.box div');
+            document.onkeydown=function(ev){
+                var oAudio=new Audio();
+                oAudio.src = oggSound['sound'+ev.keyCode];
+                oAudio.play();
+                aDiv[ev.keyCode-49].className='on';
+            };
+            document.onkeyup=function(ev){
+                aDiv[ev.keyCode-49].className='';
+            };
+        },false)
+    </script>
+</head>
+<body>
+<div class="box">
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+    <div>5</div>
+    <div>6</div>
+    <div>7</div>
+    <div>8</div>
+</div>
+</body>
+</html>

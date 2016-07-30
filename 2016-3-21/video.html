@@ -1,0 +1,82 @@
+<!--code By Z-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="copy-right" content="">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <title>士大夫撒地方第三方士大夫</title>
+    <style>
+        *{margin:0;padding:0;}
+        .box{width:800px;margin:40px auto;}
+        .barbox{width:790px;height:30px;background:#888888;position:relative;margin:0 auto;border-radius:5px;opacity: 0.8;}
+        .pro{width:0;height:8px;position:absolute;left:0;top:50%;background:#d9d9d9;margin-top:-4px;border-radius:5px 0 0 5px;}
+        .bar{width:20px;height:13px;background:#fff;position:absolute;left:0;top:8px;border-radius:40%;box-shadow: 0 0 10px #fff;}
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded',function(){
+            var oPlay=document.querySelector('#play');
+            var oV=document.querySelector('video');
+            var oPause=document.querySelector('#pause');
+            var oStop=document.querySelector('#stop');
+            var oPro=document.querySelector('.pro');
+            var oBar=document.querySelector('.bar');
+            var oBarBox = document.querySelector('.barbox');
+            oPlay.onclick=function(){
+                oV.play();
+            };
+            oPause.onclick = function(){
+                oV.pause();
+            };
+            oStop.onclick = function () {
+                oV.pause();
+                oV.currentTime=0;
+            };
+            oV.ontimeupdate=function(){
+                var scale = oV.currentTime/oV.duration;
+                oPro.style.width = oBarBox.offsetWidth*scale+'px';
+                var l = oBarBox.offsetWidth*scale;
+                if(l<0){
+                    l = 0;
+                }else if(l>oBarBox.offsetWidth-oBar.offsetWidth){
+                    l = oBarBox.offsetWidth-oBar.offsetWidth;
+                }
+                oBar.style.left = l+'px';
+            };
+            oBar.onmousedown=function(ev){
+                var disX = ev.clientX-oBar.offsetLeft;
+                document.onmousemove=function(ev){
+                    var l = ev.clientX-disX;
+                    if(l<0){
+                        l = 0;
+                    }else if(l>oBarBox.offsetWidth-oBar.offsetWidth){
+                        l = oBarBox.offsetWidth-oBar.offsetWidth;
+                    }
+                    oBar.style.left = l+'px';
+                    var scale=oBar.offsetLeft/(oBarBox.offsetWidth-oBar.offsetWidth);
+                    oPro.style.width=scale*oBarBox.offsetWidth+'px';
+                    oV.currentTime=scale*oV.duration;//本例子中的视频需要时网络上的视频，不然无法修改oV.currentTime;
+                };
+                document.onmouseup=function(){
+                    document.onmousemove=null;
+                    document.onmouseup=null;
+                };
+                return false;
+            };
+        },false)
+    </script>
+</head>
+<body>
+<div class="box">
+    <input type="button" value="播放" id="play" />
+    <input type="button" value="暂停" id="pause" />
+    <input type="button" value="停止" id="stop" /><br />
+    <div class="barbox">
+        <div class="pro"></div>
+        <div class="bar"></div>
+    </div>
+    <video src="http://images.sohu.com/ytv/SH/Coke/64036020120714021103.mp4" width="800" controls width="800"></video>
+</div>
+</body>
+</html>

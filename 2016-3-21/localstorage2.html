@@ -1,0 +1,26 @@
+<!--code By Z-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="copy-right" content="">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <title>士大夫撒地方第三方士大夫</title>
+    <style>
+        *{margin:0;padding:0;}
+        div{width:200px;height:200px;background:red;position:absolute;left:0;top:0;}
+    </style>
+    <script>
+            window.onstorage=function(ev){
+                var json=JSON.parse(localStorage[ev.key]);
+                var oDiv=document.querySelector('div');
+                oDiv.style.left = json.left+'px';
+                oDiv.style.top = json.top+'px';
+            };
+    </script>
+</head>
+<body>
+<div></div>
+</body>
+</html>

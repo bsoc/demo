@@ -1,0 +1,38 @@
+<!--code By Z-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="copy-right" content="">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <title>士大夫撒地方第三方士大夫</title>
+    <style>
+        *{margin:0;padding:0;}
+        div{width:200px;height:200px;background:red;position:absolute;left:0;top:0;}
+    </style>
+    <script>
+        window.onload=function(){
+            var oDiv=document.querySelector('div');
+            oDiv.onmousedown=function(ev){
+                var disX=ev.clientX-oDiv.offsetLeft;
+                var disY=ev.clientY-oDiv.offsetTop;
+                document.onmousemove = function(ev){
+                    oDiv.style.left = ev.clientX-disX+'px';
+                    oDiv.style.top = ev.clientY-disY+'px';
+                    var json={"left":oDiv.offsetLeft,"top":oDiv.offsetTop};
+                    localStorage.a = JSON.stringify(json);
+                };
+                document.onmouseup=function(){
+                    document.onmousemove=null;
+                    document.onmouseup=null;
+                };
+                return false;
+            }
+        }
+    </script>
+</head>
+<body>
+<div></div>
+</body>
+</html>
